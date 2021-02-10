@@ -13,13 +13,16 @@ def char_range(c1, c2):
 
 def token_range(first, second):
     if first.isnumeric():
-        pad_length = len(first)
-        pad_character = first[0]
+        if len(first) > 1:
+            pad_length = len(first)
+            pad_character = first[0]
 
-        return list(map(
-            lambda x: f'{x:{pad_character}{pad_length}d}',
-            range(int(first), int(second) + 1)
-        ))
+            return list(map(
+                lambda x: f'{x:{pad_character}{pad_length}d}',
+                range(int(first), int(second) + 1)
+            ))
+        else: # In case we don't have a padded number
+            return list(range(int(first), int(second) + 1))
     else:
         return list(char_range(first, second))
 
