@@ -6,14 +6,35 @@ import re
 import sys
 
 
-def main(drf_glob):
+def char_range(c1, c2):
+    for c in range(ord(c1), ord(c2)+1):
+        yield chr(c)
+
+
+def token_range(first, second):
+    if first.isnumeric():
+        pad_length = len(first)
+        pad_character = first[0]
+
+        return list(map(
+            lambda x: f'{x:{pad_character}{pad_length}d}',
+            range(int(first), int(second) + 1)
+        ))
+    else:
+        return list(char_range(first, second))
+
+
+def main(drf_glob, debug=False):
     tokens = re.split(r'[{}]', drf_glob)
     iterations = []
 
+    if debug:
+        print(tokens)
+
     for token in tokens:
         if '..' in token:
-            first, second = map(int, token.split('..'))
-            iterations.append(list(range(first, second + 1)))
+            first, second = token.split('..')
+            iterations.append(token_range(first, second))
         elif ',' in token:
             iterations.append(token.split(','))
         else:
