@@ -27,9 +27,10 @@ def token_range(first, second):
         return list(char_range(first, second))
 
 
-def main(drf_glob, debug=False):
+def generate(drf_glob, debug=False):
     tokens = re.split(r'[{}]', drf_glob)
     iterations = []
+    results = []
 
     if debug:
         print(tokens)
@@ -45,8 +46,10 @@ def main(drf_glob, debug=False):
                 iterations.append([token])
 
     for result in product(*iterations):
-        print(*result, sep='')
+        results.append(''.join(map(str, result)))
+
+    return results
 
 
 if __name__ == '__main__':
-    main(sys.argv[1])
+    generate(sys.argv[1])

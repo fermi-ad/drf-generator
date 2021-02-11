@@ -4,6 +4,12 @@ The DRF generator defines a syntax for expressing many [DRF](https://cdcvs.fnal.
 
 The syntax is inspired by Unix (bash) glob syntax, but not an exact match as glob is meant to file paths.
 
+## Installation
+
+```bash
+pip install --user --extra-index-url https://www-bd.fnal.gov/pip3 drf_generator
+```
+
 ## Features
 
 ### List
@@ -45,3 +51,33 @@ I:VT002
 
 - Allow square bracket lists
 - Define a special, non-glob, range step
+
+## Building tarball
+
+Make sure `setup.py` has the correct version number.
+
+```bash
+make
+```
+
+will create `drf_generator.tgz`.
+
+## Deploying
+
+This needs to be copied to the web server. Until this is automated, I'm copying it with the command
+
+```bash
+scp drf_generator.tgz chablis:/usr/local/www/data/pip3/drf_generator/drf_generator-VID.tgz
+```
+
+Replace VID with the current version number in `setup.py`. Make sure to tag the project, too.
+
+```bash
+git tag vVID
+```
+
+## Development
+
+To test local modifications, use pip's editable mode.
+
+`pip install -e .`
