@@ -27,25 +27,31 @@ def token_range(first, second):
         return list(char_range(first, second))
 
 
-def generate(drf_glob, debug=False):
-    tokens = re.split(r'[{}]', drf_glob)
-    iterations = []
+def generate(drf_globs, debug=False):
+    # Normalize input to list
+    if type(drf_globs) == 'string':
+        drf_globs = [drf_globs]
+
     results = []
 
-    if debug:
-        print(tokens)
+    for drf_glob in drf_globs:
+        tokens = re.split(r'[{}]', drf_glob)
+        iterations = []
 
-    for token in tokens:
-        if '..' in token:
-            first, second = token.split('..')
-            iterations.append(token_range(first, second))
-        elif ',' in token:
-            iterations.append(token.split(','))
-        else:
-            if token != '':
-                iterations.append([token])
+        if debug:
+            print(tokens)
 
-    for result in product(*iterations):
-        results.append(''.join(map(str, result)))
+        for token in tokens:
+            if '..' in token:
+                first, second = token.split('..')
+                iterations.append(token_range(first, second))
+            elif ',' in token:
+                iterations.append(token.split(','))
+            else:
+                if token != '':
+                    iterations.append([token])
+
+        for result in product(*iterations):
+            results.append(''.join(map(str, result)))
 
     return results
