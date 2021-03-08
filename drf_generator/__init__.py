@@ -49,7 +49,3 @@ def generate(drf_glob, debug=False):
         results.append(''.join(map(str, result)))
 
     return results
-
-
-if __name__ == '__main__':
-    generate(sys.argv[1])
