@@ -19,7 +19,7 @@ Curly brackets surrounding comma separated values define a list of strings to be
 For example:
 
 ```bash
-python drf_generator.py "{I,R}:VT001"
+python drf_generator "{I,R}:VT001"
 ```
 
 Generates:
@@ -36,7 +36,7 @@ Curly brackets surrounding two values separated by a double dot (`..`) define a 
 For example:
 
 ```bash
-python drf_generator.py "I:VT{000..002}"
+python drf_generator "I:VT{000..002}"
 ```
 
 Generates:
@@ -45,6 +45,22 @@ Generates:
 I:VT000
 I:VT001
 I:VT002
+```
+
+### Example use in code
+
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+from drf_generator import generate
+
+def main(extended_drfs):
+    return generate(extended_drfs)
+
+if __name__ == '__main__':
+    print(main(sys.argv[1:]))
+
 ```
 
 ## TODOs
