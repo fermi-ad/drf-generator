@@ -83,7 +83,7 @@ will create `drf_generator.tgz`.
 This needs to be copied to the web server. Until this is automated, I'm copying it with the command
 
 ```bash
-scp drf_generator.tgz chablis:/usr/local/www/data/pip3/drf_generator/drf_generator-VID.tgz
+scp drf_generator.tgz chablis:/usr/local/www/data/pip3/drf-generator/drf_generator-VID.tgz
 ```
 
 Replace VID with the current version number in `setup.py`. Make sure to tag the project, too.
