@@ -63,11 +63,6 @@ if __name__ == '__main__':
 
 ```
 
-## TODOs
-
-- Allow square bracket lists
-- Define a special, non-glob, range step
-
 ## Building tarball
 
 Make sure `setup.py` has the correct version number.
