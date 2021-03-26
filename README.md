@@ -47,7 +47,17 @@ I:VT001
 I:VT002
 ```
 
-### Example use in code
+### Examples
+
+#### CLI
+
+```bash
+python drf_generator "I:VT{001..009}"
+```
+
+#### Package
+
+##### Generate
 
 ```python
 #!/usr/bin/env python3
@@ -57,6 +67,22 @@ from drf_generator import generate
 
 def main(extended_drfs):
     return generate(extended_drfs)
+
+if __name__ == '__main__':
+    print(main(sys.argv[1:]))
+
+```
+
+##### Verify
+
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+from drf_generator import verify
+
+def main(extended_drfs):
+    return verify('test_file.txt', extended_drfs)
 
 if __name__ == '__main__':
     print(main(sys.argv[1:]))
