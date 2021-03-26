@@ -3,7 +3,6 @@
 
 from itertools import product
 import re
-import sys
 
 
 def char_range(c1, c2):
@@ -59,3 +58,19 @@ def generate(*drf_globs, debug=False):
     parse_globs(drf_globs)
 
     return results
+
+def verify(test_file, *globs):
+    test_requests = generate(globs)
+    valid_results = []
+
+    with open(test_file) as file:
+        for line in file.readlines():
+            valid_results.append(line.strip())
+
+    no_matches = []
+
+    for request in valid_results:
+        if request not in test_requests:
+            no_matches.append(request)
+
+    return True if len(no_matches) == 0 else no_matches
