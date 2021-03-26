@@ -140,3 +140,7 @@ cython_debug/
 
 # Application specifics
 *.tgz
+
+## Custom
+.vscode
+test_file.txt
