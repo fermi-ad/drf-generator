@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="drf-generator",
-    version="1.1.0",
+    version="1.2.0",
     author="Beau Harrison",
     author_email="beau@fnal.gov",
     description="Generates Data Request Format strings",
