@@ -22,13 +22,13 @@ jobs:
     # Test with python
     - name: Unit tests
       run: python -m unittest discover test
-    
-    # Run this?  
+     
     - name: Install dependencies
       run: make
+    
+    # Run these ? Check and distcheck
+    # - name: Run check
+    #   run: make check
       
-    - name: Run check
-      run: make check
-      
-    - name: Run distcheck
-      run: make distcheck
+    # - name: Run distcheck
+    #   run: make distcheck
