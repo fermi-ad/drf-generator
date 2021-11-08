@@ -1,0 +1,34 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10.0
+    
+    # Test with python
+    - name: Unit tests
+      run: python -m unittest discover test
+     
+    - name: Install dependencies
+      run: make
+    
+    # Run these ? Check and distcheck
+    # - name: Run check
+    #   run: make check
+      
+    # - name: Run distcheck
+    #   run: make distcheck

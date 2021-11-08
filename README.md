@@ -118,3 +118,11 @@ git tag vVID
 To test local modifications, use pip's editable mode.
 
 `pip install -e .`
+
+## Unit Tests
+
+To run unit tests under `test` folder:
+
+```bash
+python -m unittest discover test
+```
