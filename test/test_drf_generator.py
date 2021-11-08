@@ -8,45 +8,57 @@ class TestDRFGenerator(unittest.TestCase):
 
     def test_char_rangeA_F(self):
         expected = ['A', 'B', 'C', 'D', 'E', 'F']
-        i = 0
-        for result in drf_generator.char_range('A', 'F'):
-            self.assertEqual(expected[i], result)
-            i += 1
+        
+        for index, result in enumerate(drf_generator.char_range('A', 'F')):
+            self.assertEqual(expected[index], result)
+
+    def test_char_rangeF_A(self):
+        expected = ['F', 'E', 'D', 'C', 'B', 'A']
+        
+        for index, result in enumerate(drf_generator.char_range('F', 'A')):
+            self.assertEqual(expected[index], result)
 
     def test_char_range1_6(self):
         expected = ['1', '2', '3', '4', '5', '6']
-        i = 0
-        for result in drf_generator.char_range('1', '6'):
-            self.assertEqual(expected[i], result)
-            i += 1
+        
+        for index, result in enumerate(drf_generator.char_range('1', '6')):
+            self.assertEqual(expected[index], result)
 
     def test_token_range1_6(self):
         expected = [1, 2, 3, 4, 5, 6]
-        i = 0
-        for result in drf_generator.token_range('1', '6'):
-            self.assertEqual(expected[i], result)
-            i += 1
+        
+        for index, result in enumerate(drf_generator.token_range('1', '6')):
+            self.assertEqual(expected[index], result)
+    
+    def test_token_range6_1(self):
+        expected = [6, 5, 4, 3, 2, 1]
+        
+        for index, result in enumerate(drf_generator.token_range('6', '1')):
+            self.assertEqual(expected[index], result)
 
     def test_token_range001_006(self):
         expected = ['001', '002', '003', '004', '005', '006']
-        i = 0
-        for result in drf_generator.token_range('001', '006'):
-            self.assertEqual(expected[i], result)
-            i += 1
+        
+        for index, result in enumerate(drf_generator.token_range('001', '006')):
+            self.assertEqual(expected[index], result)
+
+    def test_token_range006_001(self):
+        expected = ['006', '005', '004', '003', '002', '001']
+        
+        for index, result in enumerate(drf_generator.token_range('006', '001')):
+            self.assertEqual(expected[index], result)
 
     def test_token_range008_012(self):
         expected = ['008', '009', '010', '011', '012']
-        i = 0
-        for result in drf_generator.token_range('008', '012'):
-            self.assertEqual(expected[i], result)
-            i += 1
 
+        for index, result in enumerate(drf_generator.token_range('008', '012')):
+            self.assertEqual(expected[index], result)
+            
     def test_token_range000998_001002(self):
         expected = ['000998', '000999', '001000', '001001', '001002']
-        i = 0
-        for result in drf_generator.token_range('000998', '001002'):
-            self.assertEqual(expected[i], result)
-            i += 1
+        
+        for index, result in enumerate(drf_generator.token_range('000998', '001002')):
+            self.assertEqual(expected[index], result)
 
     def test_generate_list_of_stringsI_R(self):
         result = drf_generator.generate("{I,R}:VT001")
@@ -64,7 +76,6 @@ class TestDRFGenerator(unittest.TestCase):
 
     def test_generate_list_of_strings_empty(self):
         result = drf_generator.generate("I{}:VT001")
-        # TODO should this be the expected value?
         expected = ["I:VT001"]
 
         self.assertEqual(len(result), len(expected))
@@ -120,18 +131,17 @@ class TestDRFGenerator(unittest.TestCase):
 
     def test_invalid_string1(self):
         result = drf_generator.generate("AB}C{D")
-        # TODO should this be the expected?
+        # TODO fail this test when validation is implemented
         expected = ["ABCD"]
         self.assertEqual(expected, result)
 
     def test_invalid_string2(self):
         result = drf_generator.generate("001..002")
-        # TODO should this be the expected?
         expected = ["001", "002"]
         self.assertEqual(expected, result)
 
     def test_invalid_string3(self):
         result = drf_generator.generate("A}BC,DE")
-        # TODO should this be the expected?
+        # TODO fail this test when validation is implemented
         expected = ["ABC", "ADE"]
         self.assertEqual(expected, result)
