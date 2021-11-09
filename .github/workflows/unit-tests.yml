@@ -23,7 +23,7 @@ jobs:
       run: make install
 
     - name: Unit tests
-      run: coverage run -m unittest discover test
+      run: coverage run -m unittest discover
 
     - name: Generate coverage report
       run: coverage report -m
