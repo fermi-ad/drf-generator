@@ -7,31 +7,29 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    
     - name: Set up Python 3.10
       uses: actions/setup-python@v2
       with:
         python-version: 3.10.0
-    
-    # Test with python
-    - name: Coverage
-      run: coverage run -m unittest discover
+
+    - name: Install dependencies
+      run: make install
 
     - name: Unit tests
-      run: python -m unittest discover test
-     
-    - name: Install dependencies
-      run: make
-    
+      run: coverage run -m unittest discover
+
+    - name: Generate coverage report
+      run: coverage report -m
+
     # Run these ? Check and distcheck
     # - name: Run check
     #   run: make check
-      
+
     # - name: Run distcheck
     #   run: make distcheck
