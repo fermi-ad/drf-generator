@@ -124,5 +124,11 @@ To test local modifications, use pip's editable mode.
 To run unit tests under `test` folder:
 
 ```bash
-python -m unittest discover test
+coverage run -m unittest discover
+```
+
+### Generate coverage report
+
+```bash
+coverage report -m
 ```
