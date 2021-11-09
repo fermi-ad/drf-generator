@@ -20,6 +20,9 @@ jobs:
         python-version: 3.10.0
     
     # Test with python
+    - name: Coverage
+      run: coverage run -m unittest discover
+
     - name: Unit tests
       run: python -m unittest discover test
      
