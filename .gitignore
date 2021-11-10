@@ -142,5 +142,4 @@ cython_debug/
 *.tgz
 
 ## Custom
-.vscode
 test_file.txt
