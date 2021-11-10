@@ -4,14 +4,14 @@
 import unittest
 from pathlib import Path
 
-import drf_generator
+import drf_generator.generator as drf_generator
 
 parent_path = Path(__file__).parent
 first_validation_file = parent_path.joinpath('test_validate1.txt')
 second_validation_file = parent_path.joinpath(
     'test_validate2.txt')
 
-# Unit tests for DRF Generator of extended expressions
+
 class TestDRFGenerator(unittest.TestCase):
 
     def test_char_rangeA_F(self):
@@ -41,7 +41,7 @@ class TestDRFGenerator(unittest.TestCase):
         self.assertListEqual(expected, result)
 
     def test_token_range6_1(self):
-        #expected = [6, 5, 4, 3, 2, 1]
+        # expected = [6, 5, 4, 3, 2, 1]
         # Empty expected
         expected = []
         result = [x for x in drf_generator.token_range('6', '1')]

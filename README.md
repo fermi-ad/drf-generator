@@ -1,5 +1,7 @@
 # DRF Generator
 
+![Tests](https://github.com/mCodingLLC/SlapThatLikeButton-TestingStarterProject/actions/workflows/tests.yml/badge.svg)
+
 The DRF generator defines a syntax for expressing many [DRF](https://cdcvs.fnal.gov/redmine/projects/drf/wiki) strings in a single string.
 
 The syntax is inspired by Unix (bash) glob syntax, but not an exact match as glob is meant to file paths.
@@ -63,7 +65,7 @@ python drf_generator "I:VT{001..009}"
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from drf_generator import generate
+from drf_generator.generator import generate
 
 def main(extended_drfs):
     return generate(extended_drfs)
@@ -79,7 +81,7 @@ if __name__ == '__main__':
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from drf_generator import verify
+from drf_generator.generator import verify
 
 def main(extended_drfs):
     return verify('test_file.txt', extended_drfs)
@@ -124,7 +126,7 @@ To test local modifications, use pip's editable mode.
 To run unit tests under `test` folder:
 
 ```bash
-coverage run -m unittest discover
+pytest
 ```
 
 ### Generate coverage report
@@ -132,3 +134,13 @@ coverage run -m unittest discover
 ```bash
 coverage report -m
 ```
+
+## Project structure
+
+See the inspiration for our structure and testing process here:
+
+<https://github.com/mCodingLLC/SlapThatLikeButton-TestingStarterProject>
+
+<https://youtu.be/DhUpxWjOhME>
+
+Thanks to @mCodingLLC for such an excellent introduction to a confusing world!
