@@ -1,6 +1,6 @@
 # DRF Generator
 
-![Tests](https://github.com/mCodingLLC/SlapThatLikeButton-TestingStarterProject/actions/workflows/tests.yml/badge.svg)
+![Tests](https://github.com/fermi-controls/drf-generator/actions/workflows/unit-tests.yml/badge.svg)
 
 The DRF generator defines a syntax for expressing many [DRF](https://cdcvs.fnal.gov/redmine/projects/drf/wiki) strings in a single string.
 
