@@ -10,4 +10,3 @@ clean ::
 	for ii in $$(find . -type d -name __pycache__); do \
 	  rm -rf $${ii}; \
 	done
-	rm -rf acsys.tgz __pycache__
