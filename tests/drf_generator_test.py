@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 import unittest
+from pathlib import Path
+
 import drf_generator
+
+parent_path = Path(__file__).parent
+first_validation_file = parent_path.joinpath('test_validate1.txt')
+second_validation_file = parent_path.joinpath(
+    'test_validate2.txt')
 
 # Unit tests for DRF Generator of extended expressions
 class TestDRFGenerator(unittest.TestCase):
 
     def test_char_rangeA_F(self):
-        expected = ['A', 'B', 'C', 'D', 'E', 'F']        
+        expected = ['A', 'B', 'C', 'D', 'E', 'F']
         result = [x for x in drf_generator.char_range('A', 'F')]
 
         self.assertListEqual(expected, result)
@@ -31,7 +39,7 @@ class TestDRFGenerator(unittest.TestCase):
         result = [x for x in drf_generator.token_range('1', '6')]
 
         self.assertListEqual(expected, result)
-    
+
     def test_token_range6_1(self):
         #expected = [6, 5, 4, 3, 2, 1]
         # Empty expected
@@ -65,7 +73,7 @@ class TestDRFGenerator(unittest.TestCase):
         result = [x for x in drf_generator.token_range('008', '012')]
 
         self.assertListEqual(expected, result)
-            
+
     def test_token_range000998_001002(self):
         expected = ['000998', '000999', '001000', '001001', '001002']
         result = [x for x in drf_generator.token_range('000998', '001002')]
@@ -114,32 +122,32 @@ class TestDRFGenerator(unittest.TestCase):
         result = drf_generator.generate("{I,R}:VT{001..003}")
         expected = ["I:VT001", "I:VT002", "I:VT003", "R:VT001", "R:VT002",
                     "R:VT003"]
-        
+
         self.assertListEqual(result, expected)
 
     def test_generate_nested(self):
         result = drf_generator.generate("{I,R}:VT001", "I:VT{001..002}")
         expected = ["I:VT001", "R:VT001", "I:VT001", "I:VT002"]
-        
+
         self.assertListEqual(result, expected)
 
     def test_validate1(self):
         result = drf_generator.verify(
-            "test/test_validate1.txt", "I:VT{005..015}")
+            first_validation_file, "I:VT{005..015}")
         expected = True
-        
+
         self.assertEqual(result, expected)
 
     def test_validate2(self):
         result = drf_generator.verify(
-            "test/test_validate2.txt", "I:VT{005..015}")
+            second_validation_file, "I:VT{005..015}")
         expected = ["ABCDEF", "1234", "xYz"]
-        
+
         self.assertEqual(result, expected)
 
     def test_invalid_string1(self):
         result = drf_generator.generate("AB}C{D")
-        
+
         expected = ["ABCD"]
         # TODO fail this test when validation is implemented
         self.assertEqual(expected, result)
@@ -147,12 +155,16 @@ class TestDRFGenerator(unittest.TestCase):
     def test_invalid_string2(self):
         result = drf_generator.generate("001..002")
         expected = ["001", "002"]
-        
+
         self.assertEqual(expected, result)
 
     def test_invalid_string3(self):
         result = drf_generator.generate("A}BC,DE")
         # TODO fail this test when validation is implemented
         expected = ["ABC", "ADE"]
-        
+
         self.assertEqual(expected, result)
+
+
+if __name__ == '__main__':
+    unittest.main()
