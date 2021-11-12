@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from itertools import product
 import re
+from itertools import product
 
 
 def char_range(c1, c2):
@@ -20,7 +20,7 @@ def token_range(first, second):
                 lambda x: f'{x:{pad_character}{pad_length}d}',
                 range(int(first), int(second) + 1)
             ))
-        else: # In case we don't have a padded number
+        else:  # In case we don't have a padded number
             return list(range(int(first), int(second) + 1))
     else:
         return list(char_range(first, second))
@@ -58,6 +58,7 @@ def generate(*drf_globs, debug=False):
     parse_globs(drf_globs)
 
     return results
+
 
 def verify(test_file, *globs):
     test_requests = generate(globs)
