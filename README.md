@@ -126,13 +126,19 @@ To test local modifications, use pip's editable mode.
 To run unit tests under `test` folder:
 
 ```bash
-pytest
+make test
+```
+
+You can run the complete test set versus all compatible Python versions using:
+
+```bash
+make test_full
 ```
 
 ### Generate coverage report
 
 ```bash
-coverage report -m
+make coverage
 ```
 
 ## Project structure
