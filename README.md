@@ -6,6 +6,8 @@ The DRF generator defines a syntax for expressing many [DRF](https://cdcvs.fnal.
 
 The syntax is inspired by Unix (bash) glob syntax, but not an exact match as glob is meant to file paths.
 
+*Note:* For all uses of `make` in the instructions, [py-make](https://pypi.org/project/py-make/) is a good option for Windows users.
+
 ## Installation
 
 ```bash
