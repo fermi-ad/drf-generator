@@ -2,7 +2,6 @@ name: Tests
 
 on:
   - push
-  - pull_request
 
 jobs:
   test:
@@ -24,10 +23,3 @@ jobs:
         pip install tox tox-gh-actions
     - name: Test with tox
       run: tox
-
-    # Run these ? Check and distcheck
-    # - name: Run check
-    #   run: make check
-
-    # - name: Run distcheck
-    #   run: make distcheck
