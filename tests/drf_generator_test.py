@@ -26,13 +26,13 @@ def equal(first, second):
     return first == second
 
 
-@pytest.mark.parametrize('first,second,expected,comparator', [
-    ('A', 'F', ['A', 'B', 'C', 'D', 'E', 'F'], equal),
-    ('F', 'A', [], equal),
-    ('1', '6', ['1', '2', '3', '4', '5', '6'], equal),
-    ('6', '1', [], equal),
+@pytest.mark.parametrize('first,second,expected', [
+    ('A', 'F', ['A', 'B', 'C', 'D', 'E', 'F']),
+    ('F', 'A', []),
+    ('1', '6', ['1', '2', '3', '4', '5', '6']),
+    ('6', '1', []),
 ])
-def test_char_range(first, second, expected, comparator):
+def test_char_range(first, second, expected):
     """
     Test the char_range function.
 
@@ -42,21 +42,21 @@ def test_char_range(first, second, expected, comparator):
     :param comparator: Comparator function.
     """
     result = list(drf_generator.char_range(first, second))
-    assert comparator(result, expected)
+    assert result == expected
 
 
-@pytest.mark.parametrize('first,second,expected,comparator', [
-    ('A', 'F', ['A', 'B', 'C', 'D', 'E', 'F'], equal),
-    ('F', 'A', [], equal),
-    ('1', '6', [1, 2, 3, 4, 5, 6], equal),
-    ('6', '1', [], equal),
-    ('001', '006', ['001', '002', '003', '004', '005', '006'], equal),
-    ('006', '001', [], equal),
-    ('008', '012', ['008', '009', '010', '011', '012'], equal),
+@pytest.mark.parametrize('first,second,expected', [
+    ('A', 'F', ['A', 'B', 'C', 'D', 'E', 'F']),
+    ('F', 'A', []),
+    ('1', '6', [1, 2, 3, 4, 5, 6]),
+    ('6', '1', []),
+    ('001', '006', ['001', '002', '003', '004', '005', '006']),
+    ('006', '001', []),
+    ('008', '012', ['008', '009', '010', '011', '012']),
     ('000998', '001002', ['000998', '000999',
-     '001000', '001001', '001002'], equal),
+     '001000', '001001', '001002']),
 ])
-def test_token_range(first, second, expected, comparator):
+def test_token_range(first, second, expected):
     """
     Test the token_range function.
 
@@ -66,27 +66,27 @@ def test_token_range(first, second, expected, comparator):
     :param comparator: Comparator function.
     """
     result = list(drf_generator.token_range(first, second))
-    assert comparator(result, expected)
+    assert result == expected
 
 
-@pytest.mark.parametrize('tests,expected,comparator', [
-    (['{I,R}:VT001'], ['I:VT001', 'R:VT001'], equal),
-    (['{A,B,C,D}:VT001'], ['A:VT001', 'B:VT001', 'C:VT001', 'D:VT001'], equal),
-    (['I{}:VT001'], ['I:VT001'], equal),
-    (['I:VT{001..002}'], ['I:VT001', 'I:VT002'], equal),
+@pytest.mark.parametrize('tests,expected', [
+    (['{I,R}:VT001'], ['I:VT001', 'R:VT001']),
+    (['{A,B,C,D}:VT001'], ['A:VT001', 'B:VT001', 'C:VT001', 'D:VT001']),
+    (['I{}:VT001'], ['I:VT001']),
+    (['I:VT{001..002}'], ['I:VT001', 'I:VT002']),
     (['I:VT{005..015}'], ['I:VT005', 'I:VT006', 'I:VT007', 'I:VT008', 'I:VT009',
                           'I:VT010', 'I:VT011', 'I:VT012', 'I:VT013', 'I:VT014',
-                          'I:VT015'], equal),
-    (['I:VT{003..001}'], [], equal),
+                          'I:VT015']),
+    (['I:VT{003..001}'], []),
     (['{I,R}:VT{001..003}'], ['I:VT001', 'I:VT002', 'I:VT003', 'R:VT001',
-                              'R:VT002', 'R:VT003'], equal),
+                              'R:VT002', 'R:VT003']),
     (['{I,R}:VT001', 'I:VT{001..002}'], [
-     'I:VT001', 'R:VT001', 'I:VT001', 'I:VT002'], equal),
-    (['AB}C{D'], ['ABCD'], equal),
-    (['001..002'], ['001', '002'], equal),
-    (['A}BC,DE'], ['ABC', 'ADE'], equal),
+     'I:VT001', 'R:VT001', 'I:VT001', 'I:VT002']),
+    (['AB}C{D'], ['ABCD']),
+    (['001..002'], ['001', '002']),
+    (['A}BC,DE'], ['ABC', 'ADE']),
 ])
-def test_generate(tests, expected, comparator):
+def test_generate(tests, expected):
     """
     Test the generate function.
 
@@ -95,15 +95,15 @@ def test_generate(tests, expected, comparator):
     :param comparator: Comparator function.
     """
     result = list(drf_generator.generate(*tests))
-    assert comparator(result, expected)
+    assert result == expected
 
 
-@pytest.mark.parametrize('validatee,validator,expected,comparator', [
-    (first_validation_file, 'I:VT{005..015}', [], equal),
+@pytest.mark.parametrize('validatee,validator,expected', [
+    (first_validation_file, 'I:VT{005..015}', []),
     (second_validation_file, 'I:VT{005..015}',
-     ['ABCDEF', '1234', 'xYz'], equal),
+     ['ABCDEF', '1234', 'xYz']),
 ])
-def test_verify(validatee, validator, expected, comparator):
+def test_verify(validatee, validator, expected):
     """
     Test the verify function.
 
@@ -113,4 +113,4 @@ def test_verify(validatee, validator, expected, comparator):
     :param comparator: Comparator function.
     """
     result = list(drf_generator.verify(validatee, validator))
-    assert comparator(result, expected)
+    assert result == expected
